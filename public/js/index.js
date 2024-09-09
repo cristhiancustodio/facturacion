@@ -11,7 +11,7 @@ $("#formulario").on("submit", function (event) {
 
     let regex_codigo = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
 
-    /*if (codigo == '') {
+    if (codigo == '') {
         alert("El código del producto no puede estar en blanco.");
         return false;
     } else if (!(codigo.length >= 5 && codigo.length <= 15)) {
@@ -69,7 +69,7 @@ $("#formulario").on("submit", function (event) {
         alert("La descripción del producto debe tener entre 10 y 1000 caracteres");
         return false;
     }
-*/
+
 
     $.ajax({
         type: "POST",
