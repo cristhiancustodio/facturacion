@@ -17,7 +17,7 @@ create table det_formulario_producto(
 	id_det_for_producto int not null primary key auto_increment,
     id_formulario int not null,
     id_materialProducto int not null,
-    estado char(1)
+    estado char(1) default 1
 );
 create table material_producto(
 	id_materialProducto int not null primary key auto_increment,

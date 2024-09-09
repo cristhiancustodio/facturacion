@@ -1,7 +1,8 @@
 <?php 
+use src\View\main;
 
-require __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 
-include __DIR__.'/src/view/index.php';
+(new main())->index();
 ?>
