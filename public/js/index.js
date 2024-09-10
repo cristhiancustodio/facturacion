@@ -1,6 +1,7 @@
 $("#formulario").on("submit", function (event) {
     event.preventDefault();
     let data = new FormData(this);
+
     let codigo = data.get("codigo");
     let nombre = data.get("nombre");
     let precio = parseFloat(data.get("precio") || 0);
@@ -32,6 +33,20 @@ $("#formulario").on("submit", function (event) {
         return false;
     }
 
+
+    if (id_bodega == '') {
+        alert("Debe seleccionar una bodega.");
+        return false;
+    }
+    if (id_sucursal == '') {
+        alert("Debe seleccionar una sucursal para la bodega seleccionada.");
+        return false;
+    }
+    if (id_moneda == '') {
+        alert("Debe seleccionar una moneda para el producto.");
+        return false;
+    }
+
     let regex_precio = /^\d+(\.\d{1,2})?$/;
 
     if (precio < 0) {
@@ -45,27 +60,16 @@ $("#formulario").on("submit", function (event) {
         return false;
     }
 
-    if($(".material_producto:checked").length < 2){
+    if ($(".material_producto:checked").length < 2) {
         alert("Debe seleccionar al menos dos materiales para el producto.");
         return false;
     }
-    if(id_bodega == ''){
-        alert("Debe seleccionar una bodega.");
-        return false; 
-    }
-    if(id_sucursal == ''){
-        alert("Debe seleccionar una sucursal para la bodega seleccionada.");
-        return false; 
-    }
-    if(id_moneda == ''){
-        alert("Debe seleccionar una moneda para el producto.");
-        return false; 
-    }
-    
-    if(descripcion == ''){
+
+
+    if (descripcion == '') {
         alert("La descripción del producto no puede estar en blanco.");
-        return false; 
-    }else if (!(descripcion.length >= 10 && descripcion.length <= 1000)) {
+        return false;
+    } else if (!(descripcion.length >= 10 && descripcion.length <= 1000)) {
         alert("La descripción del producto debe tener entre 10 y 1000 caracteres");
         return false;
     }
@@ -79,12 +83,19 @@ $("#formulario").on("submit", function (event) {
         contentType: false,
         dataType: "json",
         success: function (response) {
-            console.log(response);
             let data = response;
-
             if (data.estado === 'exito') {
                 alert(data.mensaje || '');
+                /**Una vez registrado limpio el formulario para otro registro */
+
+                window.location.reload();
                 $('#formulario')[0].reset();
+
+                /**Tambien se limpia la sucursal */
+                let select_sucursal = $("#id_sucursal");
+                select_sucursal.empty();
+                select_sucursal.append("<option value=''>Seleccione</option>");
+                
             } else {
                 alert(data.mensaje || '');
             }
@@ -96,6 +107,11 @@ $("#formulario").on("submit", function (event) {
     });
 });
 
+
+/**
+ * La validacion se hizo cuando el usuario salga del input con onblur
+ * recien ahi es donde buscara si el codigo no existe
+ */
 const verificaCodigoRegistrado = (event) => {
     let data = {
         "codigo": event.value,
@@ -117,7 +133,9 @@ const verificaCodigoRegistrado = (event) => {
     });
 
 }
-
+/**
+ * Para el cambio de Bodega
+ */
 const obtenerSucural = (event) => {
     const data = {
         'id_bodega': event.value,
@@ -131,7 +149,7 @@ const obtenerSucural = (event) => {
             let respuesta = response;
             let select_sucursal = $("#id_sucursal");
             select_sucursal.empty();
-            select_sucursal.append("<option value=''>[SELECCIONE]</option>");
+            select_sucursal.append("<option value=''>Seleccione</option>");
 
             respuesta.resultado.forEach(function (sucursal) {
                 select_sucursal.append(`<option value="${sucursal.id_sucursal}">${sucursal.descripcion}</option>`);

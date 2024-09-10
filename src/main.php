@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace src\View;
+namespace src;
 
 class main
 {
@@ -10,6 +10,6 @@ class main
     }
 
     public function index(){
-        include __DIR__.'/formulario.php';
+        include __DIR__.'./view/formulario.php';
     }
 }

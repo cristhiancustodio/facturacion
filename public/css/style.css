@@ -1,0 +1,116 @@
+*{
+   font-size: 16px;
+   font-family: Arial, Helvetica, sans-serif;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+textarea{
+    border-radius: 4px;
+}
+#formulario{
+    display: grid;
+    place-items: center;
+    height: 80vh;
+}
+.contenedor{
+    border: 1px solid #000000;
+    border-radius: 1%;
+    width: 40%;
+    box-shadow: 0px 0px 7px 2px #888888;
+    padding: 23px;
+    display: grid;
+    place-items: center;
+}
+.contenedor select, textarea{
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+}
+input[type="text"], select {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    border: 1px solid #00000066;
+    border-radius: 5px;
+    height: 60%;
+}
+
+.titulo-formulario h1{
+    text-align: center;
+    font-size: 2rem;
+}
+.fila{
+    display: flex;
+    margin: 5px;
+}
+.columna{
+    width: 100%;
+}
+
+.marg-5{
+    margin: 5px;
+}
+.pad-5{
+    padding: 5px;
+}
+.pad-lr-5{
+    padding: 0 5px;
+}
+.contenedor-formulario{
+    width: 100%;
+}
+.div-boton{
+    display: flex;
+    justify-content: center;
+}
+.btn-guardar{
+    background-color: #1aab8a;
+    border: 1px solid #1aab8a;
+    border-radius: 5px;
+    color: #fff;
+    width: 49%;
+    padding: 8px 0px;
+}
+.item-productos {
+    display: inline;
+}
+.oculta{
+    display: none;
+}
+@media (max-width: 920px) {
+    #formulario{
+        height: 100vh;
+    }
+    .btn-guardar{
+        width: 100%;
+    }
+    .contenedor{
+        width: 90%;
+    }
+    
+}
+@media (max-width: 720px) {
+    #formulario{
+        height: 100vh;
+    }
+    .fila{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .btn-guardar{
+        width: 100%;
+    }
+    .contenedor{
+        width: 80%;
+        padding: 15px;
+    }
+    .grid-productos{
+        display: grid;
+        grid-template-columns: auto auto auto;
+    }
+    .tabla{
+        display: none;
+    }
+}
