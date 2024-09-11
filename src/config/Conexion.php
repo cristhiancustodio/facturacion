@@ -12,7 +12,7 @@ class Conexion
     private PDO $con;
     private string $db = 'facturacion';
     private string $usuario = 'root';
-    private string $pass = 'luisnunura123456';
+    private string $pass = '';
     private string $host = 'localhost:3307';
 
     public static function getInstancia()
