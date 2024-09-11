@@ -3,12 +3,15 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 use src\Model\DatosGenerales;
 
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+/**
+ * Para obtener la sucursal de acuerdo a la bodega
+ */
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     
-    $id_bodega = (int)($_POST['id_bodega']);
+    $id_bodega = (int)($_GET['id_bodega'] ?? 0);
+
     try {
-        $resultado = (new DatosGenerales())->obtenerSucursal($id_bodega);
+        $resultado = (new DatosGenerales())->obtenerSucursalAsync($id_bodega);
 
         $mensaje = '';
         echo json_encode(

@@ -29,7 +29,13 @@ class Conexion
         $this->con = $con;
         return $this->con;
     }
+    /**
+     * Cree metodos que me ayudaran a obtener datos sin repetir el fetch a cada momento
+     */
 
+     /**
+      * Para multiples filas
+      */
     public function sentencia(string $sql, array $params = []): array
     {
         $ins = (self::getInstancia())->conectar();
@@ -42,6 +48,9 @@ class Conexion
             return [];
         }
     }
+    /**
+     * Para una fila
+     */
     public function sentenciaSimple(string $sql, array $params = [])
     {
         $ins = (self::getInstancia())->conectar();
@@ -54,7 +63,8 @@ class Conexion
             return null;
         }
     }
-    public function insertar($sql, $lista = null)
+    
+    public function insertar($sql, $lista = null): int
     {
         $ins = (self::getInstancia())->conectar();
         $stm = $ins->prepare($sql);
@@ -62,6 +72,7 @@ class Conexion
         return $ins->lastInsertId();
 
     }
+
     public function actualiza($sql, $lista = null)
     {
         $ins = (self::getInstancia())->conectar();

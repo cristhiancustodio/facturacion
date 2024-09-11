@@ -1,3 +1,6 @@
+
+DROP DATABASE IF EXISTS facturacion;
+
 create database facturacion;
 
 use facturacion;
@@ -42,7 +45,7 @@ create table moneda(
 	id_moneda int not null primary key auto_increment,
     descripcion varchar(255) not null,
     estado char(1) default 1
-)
+);
 
 -- INSERTADO DE DATOS
 

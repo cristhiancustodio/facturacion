@@ -7,12 +7,14 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 $datos = new DatosGenerales();
 
-
+/**
+ * Para verificar si ya hay un codigo que existe en al BD
+ */
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $codigo = $_GET['codigo'] ?? '';
 
-    $resultado = $datos->validaCodigoFactura($codigo);
+    $resultado = $datos->validaCodigoFacturaAsync($codigo);
 
     if($resultado != ''){
         echo json_encode([

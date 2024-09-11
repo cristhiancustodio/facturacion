@@ -9,6 +9,9 @@ p{
 textarea{
     border-radius: 4px;
 }
+table{
+    border-collapse: collapse;
+}
 #formulario{
     display: grid;
     place-items: center;
@@ -78,6 +81,9 @@ input[type="text"], select {
 }
 .oculta{
     display: none;
+}
+.tabla{
+    margin-top: 15px;
 }
 @media (max-width: 920px) {
     #formulario{

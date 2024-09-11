@@ -82,31 +82,39 @@ $("#formulario").on("submit", function (event) {
         processData: false,
         contentType: false,
         dataType: "json",
+        
+        beforeSend: function(){
+            //seguridad para solo un click en envio
+            $(".btn-guardar").prop("disabled", true);
+        },
         success: function (response) {
             let data = response;
             if (data.estado === 'exito') {
                 alert(data.mensaje || '');
-                /**Una vez registrado limpio el formulario para otro registro */
-
+                
+                //recarga porque ahora muestro datos en tabla
                 window.location.reload();
-                $('#formulario')[0].reset();
 
-                /**Tambien se limpia la sucursal */
+                /**Una vez registrado limpio el formulario para otro registro */
+                // $('#formulario')[0].reset();
+
+                /**Tambien se limpia la sucursal 
                 let select_sucursal = $("#id_sucursal");
                 select_sucursal.empty();
                 select_sucursal.append("<option value=''>Seleccione</option>");
-                
+                */
             } else {
                 alert(data.mensaje || '');
             }
         },
         error: function (response, estado, error) {
-
             console.error('Error en la solicitud:', estado, error);
+        },
+        complete: function(){
+            $(".btn-guardar").prop("disabled", false);
         }
     });
 });
-
 
 /**
  * La validacion se hizo cuando el usuario salga del input con onblur
@@ -141,7 +149,7 @@ const obtenerSucural = (event) => {
         'id_bodega': event.value,
     }
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "src/controller/Sucursal.php",
         data: data,
         dataType: "JSON",

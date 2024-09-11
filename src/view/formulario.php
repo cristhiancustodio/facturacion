@@ -1,13 +1,14 @@
 <?php
 
 use src\Model\DatosGenerales;
+use src\Model\FormularioModel;
 
 $generales = new DatosGenerales();
 
 $lista_bodega = $generales->obtenerBodegas();
 $lista_monedas = $generales->obtenerMonedas();
 $lista_material_producto = $generales->obtenerMaterialProducto();
-$listado = $generales->listarDatos();
+$listado = (new FormularioModel())->listarDatos();
 
 ?>
 
@@ -105,37 +106,38 @@ $listado = $generales->listarDatos();
     <!-- 
     SE QUE NO ESTA EN LA TAREA PERO LO DECIDI HACER
     LA TABLA LO OCULTO EN RESPONSIVE -->
-
-    <table width="80%" align="center" border="1" class="tabla <?= ($listado ?? []) == [] ? "oculta" : ""?>" >
-        <thead>
-            <tr>
-                <td></td>
-                <td>Codigo</td>
-                <td>Nombre</td>
-                <td>Bodega</td>
-                <td>Sucursal</td>
-                <td>Moneda</td>
-                <td>Precio</td>
-                <td>Materiales Productos</td>
-                <td>Descripcion</td>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($listado ?? [] as $key => $value) {?>
-            <tr>
-                <td><?= $key + 1?></td>        
-                <td><?= $value->codigo ?? ''?></td>        
-                <td><?= $value->nombre ?? ''?></td>        
-                <td><?= $value->bodega ?? ''?></td>        
-                <td><?= $value->sucursal ?? ''?></td>        
-                <td><?= $value->moneda ?? ''?></td>        
-                <td><?= $value->precio ?? ''?></td>        
-                <td><?= $value->materiales ?? ''?></td>        
-                <td><?= $value->descripcion ?? ''?></td>        
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+    <div class="">
+        <table width="80%" align="center" border="1" class="tabla <?= ($listado ?? []) == [] ? "oculta" : ""?>" >
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>Codigo</td>
+                    <td>Nombre</td>
+                    <td>Bodega</td>
+                    <td>Sucursal</td>
+                    <td>Moneda</td>
+                    <td>Precio</td>
+                    <td>Materiales productos</td>
+                    <td>Descripción</td>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($listado ?? [] as $key => $value) {?>
+                <tr>
+                    <td><?= $key + 1?></td>        
+                    <td><?= $value->codigo ?? ''?></td>        
+                    <td><?= $value->nombre ?? ''?></td>        
+                    <td><?= $value->bodega ?? ''?></td>        
+                    <td><?= $value->sucursal ?? ''?></td>        
+                    <td><?= $value->moneda ?? ''?></td>        
+                    <td><?= $value->precio ?? ''?></td>        
+                    <td><?= $value->materiales ?? ''?></td>        
+                    <td><?= $value->descripcion ?? ''?></td>        
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 

@@ -10,13 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $formulario = new FormularioModel();
     $generales = new DatosGenerales();
     
-    //$formulario->resetMaterialProducto(0);
-
-
     try {
 
-        if($generales->validaCodigoFactura($_POST['codigo']) > 0){
+        if($generales->validaCodigoFacturaAsync($_POST['codigo']) > 0){
+            
             throw new Exception("Este codigo ya está registrado", 1);
+
         }
 
         $lista = [
@@ -36,9 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id_formulario = $formulario->insertarFormulario($lista);
 
         if ($id_formulario > 0) {
-
+            /**Si se registra formulario agregaremos los materiales en una nueva tabla */
             foreach ($lista_material_producto as $key => $value) {
-
                 $array_material[$key][":id_formulario"] = $id_formulario;
                 $array_material[$key][":id_materialProducto"] = $value;
             }
